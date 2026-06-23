@@ -13,10 +13,10 @@ License: All rights reserved (see [`LICENSE`](LICENSE))
 
 | Date | Disclosed to | Relationship | Purpose | Channel |
 |------|--------------|--------------|---------|---------|
-| 2026-06-23 | Lawyer cousins | Family / legal counsel | IP / ownership advice | Message |
-| 2026-06-23 | Friend | Personal | Review / feedback | Message |
-| 2026-06-23 | The Quadrant — Pooya Tolouei, Leandro Carvalho, Terry Lynch | Colleagues (governance group) | Review / awareness | Message |
-| 2026-06-23 | Chieko Shirai | Sr CSA Manager (coach) | Review / awareness | Message |
+| 2026-06-23 | Legal counsel (family) | Family / legal counsel | IP / ownership advice | Message |
+| 2026-06-23 | Personal friend | Personal | Review / feedback | Message |
+| 2026-06-23 | Three colleagues (governance group) | Colleagues (governance group) | Review / awareness | Message |
+| 2026-06-23 | Senior manager (coach) | Sr manager (coach) | Review / awareness | Message |
 
 ## Provenance events
 
