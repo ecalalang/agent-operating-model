@@ -18,6 +18,16 @@ License: All rights reserved (see [`LICENSE`](LICENSE))
 | 2026-06-23 | The Quadrant — Pooya Tolouei, Leandro Carvalho, Terry Lynch | Colleagues (governance group) | Review / awareness | Message |
 | 2026-06-23 | Chieko Shirai | Sr CSA Manager (coach) | Review / awareness | Message |
 
+## Provenance events
+
+Third-party acknowledgements and other dated events that corroborate the author as the
+originating source. Append-only.
+
+- **2026-06-23 (midday)** — A co-lead colleague (governance group) contacted the author
+  asking how the model and agent crew were created, stating they were attempting a similar
+  approach and wanting to see how the author had done it. Logged as third-party
+  acknowledgement of the author as the originating source.
+
 ---
 
 © 2026 Eugene Calalang. All rights reserved.
