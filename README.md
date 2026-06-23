@@ -42,7 +42,8 @@ This framework was synthesised by Eugene Calalang from first principles while de
 real multi-agent crew. It is captured here, dated and attributed, as portable personal IP.
 Related fields exist (multi-agent orchestration, durable execution); the contribution of
 this work is the **synthesis and the employment operating-model framing** — see
-[`docs/agent-operating-model.md`](docs/agent-operating-model.md) for the full model and
+[`docs/agent-operating-model.md`](docs/agent-operating-model.md) for the full model,
+[`docs/diagram.md`](docs/diagram.md) for the one-page visual, and
 [`docs/prior-art.md`](docs/prior-art.md) for an honest map of adjacent work.
 
 ---
