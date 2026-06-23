@@ -36,15 +36,35 @@ control-plane problems that distributed systems, message queues, and durable-exe
 engines have always had to solve — re-encountered in an agentic world, and best expressed
 in the familiar language of *employment*.
 
-## Provenance
+## Provenance — how this came about
 
-This framework was synthesised by Eugene Calalang from first principles while designing a
-real multi-agent crew. It is captured here, dated and attributed, as portable personal IP.
-Related fields exist (multi-agent orchestration, durable execution); the contribution of
-this work is the **synthesis and the employment operating-model framing** — see
-[`docs/agent-operating-model.md`](docs/agent-operating-model.md) for the full model,
-[`docs/diagram.md`](docs/diagram.md) for the one-page visual, and
-[`docs/prior-art.md`](docs/prior-art.md) for an honest map of adjacent work.
+I didn't set out to write a framework, and I didn't start from the literature. This came
+out of practice — and it started on **my own personal project**, before I ever applied any
+of it to my day job. I was building and running a multi-agent crew of my own, and I kept
+hitting the same wall — not *can* the agents run, but *who is allowed to be awake, who picks
+up which task, what happens when an agent needs to ask a human mid-task, and how does the
+next instance know what the last one was doing.* Solving those problems one at a time, the
+same shape kept appearing: I was, in effect, **employing** the agents — job descriptions, a
+manager, handovers, a chain of command. The operating model is that shape, written down. The
+crew I run now is not the first; it's a later application of a model I'd already arrived at
+on my own.
+
+I arrived at it **independently**. I hadn't read the internals of the existing agent
+frameworks when the concept formed — it came from the problems in front of me, not from
+copying a design. *Afterwards*, I deliberately mapped it against the field (CrewAI,
+LangGraph, the Microsoft Agent Framework, OpenAI's Agents SDK, AWS AgentCore, the A2A/MCP
+standards) to be honest about what overlaps and what doesn't. That map is in
+[`docs/prior-art.md`](docs/prior-art.md), and it openly states which mechanics are now
+industry-standard.
+
+So I make a deliberately narrow claim. The *mechanics* — durable tasks, agent cards,
+cross-session memory — are not new, and I say so. What is mine is the **independent
+derivation from practice** and the **employment operating-model framing**: a way to make an
+agent workforce legible, governable, and trustworthy to the humans who delegate to it. See
+[`docs/agent-operating-model.md`](docs/agent-operating-model.md) for the full model and
+[`docs/diagram.md`](docs/diagram.md) for the one-page visual.
+
+This document is captured here, dated and attributed, as portable personal IP.
 
 ---
 
