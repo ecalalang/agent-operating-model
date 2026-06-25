@@ -23,6 +23,10 @@ License: All rights reserved (see [`LICENSE`](LICENSE))
 Third-party acknowledgements and other dated events that corroborate the author as the
 originating source. Append-only.
 
+> **All dates AEST (UTC+10).** Real-world events (Teams, messages) are recorded in the author's
+> local AEST. Where an event is sourced from operational DB records, the underlying SQLite
+> `datetime('now')` stamp is UTC and has been converted to AEST (+10) before logging here.
+
 - **2026-06-23 (midday)** — A co-lead colleague (governance group) contacted the author
   asking how the model and agent crew were created, stating they were attempting a similar
   approach and wanting to see how the author had done it. Logged as third-party
