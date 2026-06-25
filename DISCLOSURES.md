@@ -82,6 +82,25 @@ originating source. Append-only.
   independent domains weeks before the 2026-06-24 convergent-construct observation — rather than a
   single-context artifact. Domain-specific details retained only in the private provenance notes.
 
+- **2026-06-25** — Prior-art receipt (platform-predating origin; all dates AEST / UTC+10). The
+  author's operating model was first instantiated on a vendor's implementation of a third-party
+  **open-source agent framework**, during the period when that implementation carried an earlier
+  pre-release name and **before** it was officially renamed (the rename was publicly announced
+  **2026-06-02**). The author personified the agent with a **named persona from the first day of
+  use**. The vendor platform itself (open-source framework → vendor implementation → later
+  official rename) is expressly **not** the subject of this claim; the claim is solely the
+  author's operating-model layer built on top of it. Recovered backup artifacts independently
+  establish: (a) the agent's identity/persona store dated **2026-04-28**; (b) scheduled,
+  unattended automations running from **early May 2026**; (c) the crew command language and a
+  database column assigning **named agent roles** (an org-style role assignment) preserved in
+  pre-rename memory. This places the author's named-persona, role-assigned agent workforce in
+  continuous operation from **late April / early May 2026** — roughly five-to-eight weeks before
+  the 2026-06-24 observation of the structurally-convergent official construct, and predating the
+  platform's own 2026-06-02 official renaming. Logged to establish that the operating model
+  predates not only the convergent construct but the current platform branding itself, and is
+  platform-neutral. Platform/product names and personal corpus details retained only in the
+  private provenance notes.
+
 ---
 
 © 2026 Eugene Calalang. All rights reserved.
