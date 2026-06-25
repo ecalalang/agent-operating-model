@@ -70,6 +70,18 @@ originating source. Append-only.
   pre-date the 2026-06-24 observation. Logged to corroborate sustained, prior, independent
   authorship and operation of the agents-as-employees operating model.
 
+- **2026-06-25** — Prior-art receipt (cross-domain portability; all dates AEST / UTC+10). A
+  separate project in an unrelated personal domain, **independently dated from 2026-06-02**,
+  applies the same operating model to a different problem space: a self-hosted **"Flight Deck"**
+  platform running a **crew of named agent personas**, a panel of persona analysts that
+  **deliberate and vote** before an action is taken, and **scheduled agents ("skills") that run
+  jobs automatically**. Its version history shows the persona concept present from the first day
+  (2026-06-02) and, as of 2026-06-25, the project explicitly reconciled to the same Agent
+  Operating Model tier structure and per-persona model budgets used elsewhere. This corroborates
+  that the model is the author's **portable, vendor- and domain-neutral IP** — operated across two
+  independent domains weeks before the 2026-06-24 convergent-construct observation — rather than a
+  single-context artifact. Domain-specific details retained only in the private provenance notes.
+
 ---
 
 © 2026 Eugene Calalang. All rights reserved.
