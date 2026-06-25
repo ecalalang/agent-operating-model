@@ -101,6 +101,24 @@ originating source. Append-only.
   platform-neutral. Platform/product names and personal corpus details retained only in the
   private provenance notes.
 
+- **2026-06-25** — Prior-art receipt (contemporaneous third-party-witnessed articulation; all dates
+  AEST / UTC+10). The author's own enterprise-messaging history establishes that on **2026-06-04**
+  — twenty days before the 2026-06-24 observation of the structurally-convergent official construct,
+  and prior to the author's own 2026-06-23 formal write-up — the author described the **full
+  operating model to a named professional colleague (a witness)** in these terms: *"I've written up
+  the operating model behind how I run a crew of AI agents: who's allowed to be awake, who
+  dispatches work, how a task parks and hands back to a human, the chain of command."* The same
+  2026-06-04 exchange also records the author assigning work to a **named agent persona** and
+  framing the agents as **replacing outsourced/vendor labour**. By **2026-06-11** the same thread
+  shows the crew **running in production** and a colleague independently reproducing the author's
+  dashboard pattern. This single contemporaneous record independently establishes — through a
+  third-party-witnessed, platform-timestamped channel outside the author's own machine — that the
+  core operating model **and** its key control concepts (an autonomy/"who is awake" boundary, a
+  central dispatcher, a human-handback/parking step, and a chain of command) were authored and
+  communicated **before** the convergent-construct observation. Logged to corroborate that these
+  concepts are the author's prior, independently-witnessed work, not a later adoption. Counterpart
+  names, verbatim quotes and message references retained only in the private provenance notes.
+
 ---
 
 © 2026 Eugene Calalang. All rights reserved.
