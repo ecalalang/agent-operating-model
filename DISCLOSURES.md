@@ -38,6 +38,18 @@ originating source. Append-only.
   authorship of the tiered "agents-as-employees" operating model. Named specifics retained
   only in the private provenance notes.
 
+- **2026-06-25** — Prior-art receipt (independently timestamped implementation timeline; all
+  times AEST / UTC+10). The author's operating model — an orchestrating lead that **delegates to
+  ephemeral specialist workers**, organised as a tiered crew with a delegate-never-execute rule —
+  was **designed and recorded in the author's operational records on 2026-06-23**. A working
+  **dispatcher implementation** of that model (classify a request → spawn an ephemeral specialist
+  worker with a per-role model budget → collect → report) was **running in production by the
+  morning of 2026-06-24**, with the first end-to-end run independently timestamped. Both the
+  design (a full day prior) and the working implementation are dated **at or before** the
+  2026-06-24 observation of the structurally-convergent official construct. Logged to corroborate
+  that the author defined and was already operating this model independently — i.e. is the prior,
+  independent originator, not a follower.
+
 ---
 
 © 2026 Eugene Calalang. All rights reserved.
