@@ -54,6 +54,22 @@ originating source. Append-only.
   that the author defined and was already operating this model independently — i.e. is the prior,
   independent originator, not a follower.
 
+- **2026-06-25** — Prior-art receipt (operational-record timeline; all times AEST / UTC+10). The
+  author's own version-controlled and database records establish a named-persona agent crew
+  operating for roughly **five weeks before** the 2026-06-24 observation of the convergent
+  construct: (a) **2026-05-21** — the author's skills/agent repository is created with an initial
+  agent ("Worf") and 26 skills; (b) **2026-06-05** — the crew's decision-log database begins
+  recording; (c) **2026-06-12** — a crew bootstrap manifest and named per-persona context files
+  are committed (the same commit *retires* an earlier crew lineage, which therefore predates it);
+  (d) **2026-06-17** — a formal multi-persona system with per-persona model assignments and an
+  explicit chain-of-command role is committed; (e) **2026-06-23** — an orchestrator-plus-ephemeral-
+  specialist crew and a working dispatcher are committed, and the Agent Operating Model framework
+  (v0.1) is captured with its explicit thesis — *"running AI agents as a managed, accountable
+  workforce"*, *"the agent as an employee"*, and *"the employment mapping"*. All of the above are
+  independently timestamped in the author's own commit history and operational databases and
+  pre-date the 2026-06-24 observation. Logged to corroborate sustained, prior, independent
+  authorship and operation of the agents-as-employees operating model.
+
 ---
 
 © 2026 Eugene Calalang. All rights reserved.
