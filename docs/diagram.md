@@ -65,11 +65,12 @@ flowchart TD
 
 ---
 
-**The seven invariants:** ① one always-on agent (orchestrator) · ② never block a process on
-an async/human dependency — park the task · ③ exactly one consumer per message · ④ only the
-orchestrator auto-drains dispatch · ⑤ memory & journals belong to persona/task, never the
+**The eight invariants:** ① one auto-drainer per lane (orchestration may nest) · ② never block a
+process on an async/human dependency — park the task · ③ exactly one consumer per message · ④ only
+the orchestrator auto-drains dispatch · ⑤ memory & journals belong to persona/task, never the
 process · ⑥ engine is generic, identity lives in the card · ⑦ autonomy bounded by an explicit
-chain of command.
+chain of command · ⑧ supervision is free, spend is budgeted, confidential roles are
+residency-pinned.
 
 ---
 

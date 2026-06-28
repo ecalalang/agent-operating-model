@@ -79,11 +79,18 @@ specific contracts the surveyed frameworks still do not prescribe:
 5. **A bounded chain of command.** Autonomy as an explicit, per-role dial inside a stated
    hierarchy, rather than an implicit default — closer to AgentCore's policy layer in spirit, but
    expressed as an org chart rather than a rule engine.
+6. **Cost & residency governance as an operating concern.** A declared economic and data-residency
+   contract over the workforce: **zero-cost supervision** (the always-on layer imposes no
+   per-decision model cost — a model-less daemon or a non-billed idle wait), **per-role spend
+   budgets** resolved from configuration and gated at the top tier, and **confidential roles pinned
+   to a residency boundary** with a dispatcher that **fails closed** rather than route private data
+   off-boundary. The surveyed runtimes offer observability and policy hooks; they do not prescribe
+   an *operating model* for who-may-spend-what and where-data-may-go.
 
 > Net: the mechanical primitives (cards, durable tasks, cross-session memory, handoffs) are now
 > commodity. AOM's defensible core is the **operating/governance model layered over them**: the
 > employment framing, the awake/forbidden trigger taxonomy, two-doors take-over, the human
-> handover mandate, and the explicit chain of command.
+> handover mandate, the explicit chain of command, and cost-and-residency governance.
 
 ## Honest bottom line
 

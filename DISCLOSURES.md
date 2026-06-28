@@ -119,6 +119,27 @@ originating source. Append-only.
   concepts are the author's prior, independently-witnessed work, not a later adoption. Counterpart
   names, verbatim quotes and message references retained only in the private provenance notes.
 
+- **2026-06-28** — Reference-implementation receipt (managed-tier validation; all dates AEST /
+  UTC+10). The author's separate personal-domain project (the same cross-domain implementation
+  noted in the 2026-06-25 portability receipt) was inspected in live production and found to
+  instantiate the **managed tier** of this model end-to-end: (a) a **model-less always-on
+  orchestrator daemon** that auto-drains a dispatch lane, performs an **atomic claim** before
+  spawning a worker, and **parks** a task that exits without completing it for later **re-spawn**
+  with its saved state re-injected; (b) a **second, independent orchestrator** scoped to a
+  sub-crew, with its own queue and a faster polling cadence — confirming orchestration that
+  **nests per lane** rather than a single system-wide poller; (c) the **two-doors** identity model
+  in production — one persona reachable both as a live human-driven session and as an orchestrated
+  ephemeral spawn, sharing a single memory namespace; (d) **per-role model/cost budgets** resolved
+  from configuration (never hardcoded) with the highest tier gated on explicit human approval, and
+  routine roles routed to the cheapest capable model; and (e) **residency-pinned** confidential
+  roles whose dispatcher **fails closed** — refusing, as a hard canary, to route private data to an
+  off-device provider. Observed alongside a live operations dashboard surfacing per-task dispatcher
+  state (claimed / parked) and the model assigned to each job. Logged as a dated reference
+  implementation corroborating that the model is real, complete, and operating — and as the
+  motivating evidence for adding an explicit **cost-and-residency-governance** contract to the
+  framework on this date. Project, host, and product specifics retained only in the private
+  provenance notes.
+
 ---
 
 © 2026 Eugene Calalang. All rights reserved.

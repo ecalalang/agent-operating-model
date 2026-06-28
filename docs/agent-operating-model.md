@@ -36,12 +36,14 @@ all eight, and all eight fall out of asking "but what happens when…?".
 
 ## 3. Roles, triggers, and tiers
 
-### 3.1 One always-on agent
-Exactly **one** agent in a crew is persistently running: the **Orchestrator**. It is the
-only component that watches for work and assigns it. Everyone else is **summoned on a
-trigger** and is otherwise not running. This keeps cost bounded and makes coordination
-deterministic — there is a single dispatcher, not a swarm of pollers competing for the same
-queue.
+### 3.1 One always-on auto-drainer per lane
+Exactly **one** orchestrator persistently watches each **dispatch lane** and assigns its work.
+Everyone else is **summoned on a trigger** and is otherwise not running. The invariant is one
+auto-drainer **per lane**, not one per system: a simple crew runs a single orchestrator, while a
+larger crew **nests** — a sub-crew may run its own orchestrator over its own lane, queue, and
+polling cadence (e.g. a fast operational loop beneath a slower strategic one). Within any one lane
+there is still a **single dispatcher, not a swarm of pollers** competing for the same queue. This
+keeps cost bounded and coordination deterministic while letting orchestration scale hierarchically.
 
 ### 3.2 Trigger taxonomy
 Roles are woken by *event type*, not kept idling:
@@ -67,7 +69,7 @@ The model supports two deployment tiers that share the same primitives:
 A crew can graduate from unmanaged to managed without changing its persona cards or
 learning loops.
 
-## 4. The eight primitives
+## 4. The nine primitives
 
 ### 4.1 Persona card (job description)
 A declarative definition of a role: its name, the skills/tools it may use, its model and
@@ -140,6 +142,23 @@ orchestrator → worker roles.** Workers execute; the orchestrator coordinates; 
 role designs and decides *with* the human; the human owns intent. No layer exceeds its
 mandate. Autonomy is a dial set per role, not a default.
 
+### 4.9 Cost & residency governance (economic accountability)
+An employed workforce has a budget and a confidentiality boundary; so does an agent crew. Three
+contracts make the economics and data-residency of the crew first-class, not incidental:
+
+- **Zero-cost supervision.** The always-on layer — the orchestrator/auto-drainer — must impose
+  **no per-decision model cost.** Watching for work is mechanical: either a model-less daemon, or a
+  model-backed role that idles on a non-billed wait and only consumes budget when actual work
+  arrives. *Who is awake must be cheap to keep awake.*
+- **Per-role spend budget, enforced.** Each persona card declares a model/cost tier
+  (e.g. `light`/`heavy`/`maximum`). The tier is **resolved from configuration, never hardcoded**,
+  and the highest tier requires explicit human approval per task. Routine roles run on the cheapest
+  capable model; scarce expensive capacity is spent only where it changes the outcome.
+- **Residency pin with a hard canary.** A role that handles confidential data is **pinned to a
+  residency boundary** (e.g. on-device / local inference). The dispatcher must **fail closed** —
+  refuse, not warn — when routing such a role would cross that boundary. Residency is an invariant
+  of the card, enforced at dispatch, not a guideline.
+
 ## 5. Task lifecycle
 
 A task is the durable unit of work. Its state machine:
@@ -163,15 +182,21 @@ The process may start and stop many times; the *task* persists across all of the
 
 ## 6. Design invariants
 
-1. **One always-on agent** (the orchestrator); everyone else is triggered.
+1. **One auto-drainer per lane** — each dispatch lane has exactly one always-on orchestrator;
+   orchestration may nest (a sub-crew owns its own orchestrator, queue, and cadence). Everyone
+   else is triggered.
 2. **Never block a process on an async/human dependency** — park the task instead.
 3. **Exactly one consumer per message** — by address first, claim second, idempotency third.
 4. **Only the orchestrator auto-drains the dispatch lane.**
 5. **Memory and journals belong to the persona/task, never the process.**
 6. **Engine is generic; identity lives in the card.**
 7. **Autonomy is bounded by an explicit chain of command.**
+8. **Supervision is free; spend is budgeted; confidential roles are residency-pinned.** The
+   always-on layer costs nothing per decision; each role's model spend is declared and enforced
+   from configuration (top tier human-gated); and a confidential role fails closed rather than
+   leave its residency boundary.
 
-Hold these seven invariants and a crew of agents behaves like a well-run team rather than a
+Hold these eight invariants and a crew of agents behaves like a well-run team rather than a
 race condition.
 
 ## 7. Relationship to existing fields
