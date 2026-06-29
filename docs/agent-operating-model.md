@@ -2,7 +2,7 @@
 
 > A vendor-neutral framework for running AI agents as a managed, accountable workforce.
 >
-> Author: **Eugene Calalang** · First captured: **2026-06-23** · Updated: **2026-06-29** · Status: Draft v0.2
+> Author: **Eugene Calalang** · First captured: **2026-06-23** · Updated: **2026-06-30** · Status: Draft v0.3
 
 ---
 
@@ -268,6 +268,38 @@ smaller claim; it is the **load-bearing** one.
 > achievement — it's the honest one, and it's exactly what the job requires."*
 >
 > — an agent persona running a reference implementation of this model, articulated in session, 2026-06-29
+
+## 10. Portability — the orchestrator is deployable, the builders are remote
+
+The model's most practical property is that a crew is **portable across projects, customers, and
+domains without a rebuild.** This is not a happy accident of good code; it falls directly out of the
+operating model, and it rests on a clean separation of three roles:
+
+- **The engine** is constant. The primitives — identity, memory, dispatch, escalation, claim, journal,
+  evidence gate, chain of command — do not change between projects. They ship once.
+- **The orchestrator is the resident.** A single orchestrator persona (or a clone of it) is **deployed
+  with each project** and stays on station to run the local crew after the people who stood it up have
+  moved on. It is the one durable agent left behind — not a tool, a *resident operator*.
+- **The builders are remote.** The humans and command-tier agents who design and repair the system do
+  **not** live inside the project. They operate from outside and reach *into* the resident orchestrator
+  through a maintenance channel — the same message bridge the crew uses internally — to wire new tools,
+  fix faults, and adjust the roster while the project keeps running.
+
+This topology is what makes *"build the ship, then crew it"* repeatable: you deploy an operator and keep
+an open line to it, rather than re-deriving a bespoke system for every engagement.
+
+It also resolves a hard truth: **tool requirements are per-project.** A universal provisioning gate is the
+wrong shape, because every project, customer, and domain needs a different set of capabilities. So the
+resident orchestrator validates each worker against a **per-project tool manifest** before dispatch —
+refusing to spawn a worker whose required tools are not wired, rather than letting it fail silently — and
+when a project surfaces a *new* tool need, the remote builders dial in and provision it. The system is
+**deliberately not** perfect-and-universal; it is **adaptable**, which is the stronger property.
+
+Crucially, remoteness does not cost accountability. The resident orchestrator is still bound by the same
+evidence gate and chain of command, now answerable to **external** owners over the maintenance channel.
+The crew can be left to run a project precisely because every action it takes remains identified,
+journaled, and provable to people who are no longer in the room. Portability and accountability are the
+same mechanism viewed from two distances.
 
 ---
 
