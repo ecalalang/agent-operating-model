@@ -2,7 +2,7 @@
 
 > A vendor-neutral framework for running AI agents as a managed, accountable workforce.
 >
-> Author: **Eugene Calalang** · First captured: **2026-06-23** · Status: Draft v0.1
+> Author: **Eugene Calalang** · First captured: **2026-06-23** · Updated: **2026-06-29** · Status: Draft v0.2
 
 ---
 
@@ -30,9 +30,10 @@ counterpart in the AOM:
 | "What did you do on this?" / handover notes | **Working journal** — per-task play-by-play |
 | Talk to them live, *or* let them work async | **Two doors** — direct session and orchestrated spawn |
 | Reports to a boss, who reports up | **Chain of command** — bounded autonomy |
+| "Did you actually finish?" — proof before sign-off | **Evidence gate** — completion is verified, not asserted |
 
 The completeness of this mapping is itself evidence the model is sound: a real worker needs
-all eight, and all eight fall out of asking "but what happens when…?".
+all nine, and all nine fall out of asking "but what happens when…?".
 
 ## 3. Roles, triggers, and tiers
 
@@ -69,7 +70,7 @@ The model supports two deployment tiers that share the same primitives:
 A crew can graduate from unmanaged to managed without changing its persona cards or
 learning loops.
 
-## 4. The nine primitives
+## 4. The ten primitives
 
 ### 4.1 Persona card (job description)
 A declarative definition of a role: its name, the skills/tools it may use, its model and
@@ -159,13 +160,25 @@ contracts make the economics and data-residency of the crew first-class, not inc
   refuse, not warn — when routing such a role would cross that boundary. Residency is an invariant
   of the card, enforced at dispatch, not a guideline.
 
+### 4.10 Evidence-gated completion (verifiable trust)
+Trust is granted, but it is **verifiable**. A worker does not close a task by *asserting* it is
+done; it must produce **evidence** — the artifact, the passing check, the diff, the journal trail
+— and an **evidence gate** validates that proof before the task may transition to `done`. Unproven
+completion is **rejected** and returned (or re-dispatched), never rubber-stamped. The discipline has
+a mirror image: a worker that *cannot* finish must **fail loudly** — emit a structured blocker that
+says exactly what broke and what it needs — rather than exit silently. Verifiable success and legible
+failure are the same property seen from two sides: both convert "done" from a claim the worker makes
+into a fact the system can check. *Verifiable actions are what generate trust* — a crew you can trust
+without watching is a crew whose every completion leaves proof behind.
+
 ## 5. Task lifecycle
 
 A task is the durable unit of work. Its state machine:
 
 ```
-queued ──▶ dispatched ──▶ running ──▶ done
-                              │
+queued ──▶ dispatched ──▶ running ──▶ verified ──▶ done
+                              │            │
+                              │            └──▶ rejected ──▶ running   (proof insufficient)
                               ├──▶ blocked(awaiting:<who>) ──▶ ready ──▶ running
                               │            (answer arrives, state re-injected)
                               └──▶ failed ──▶ (retry | escalate)
@@ -174,6 +187,8 @@ queued ──▶ dispatched ──▶ running ──▶ done
 - **queued** — created, addressed to the `dispatch` lane.
 - **dispatched** — claimed by the orchestrator, persona selected.
 - **running** — an instance is live and working; it journals as it goes.
+- **verified** — completion evidence is validated by the evidence gate; insufficient proof is
+  **rejected** back to `running`.
 - **blocked** — parked on a dependency; process released, state saved.
 - **ready** — dependency satisfied; eligible for re-spawn.
 - **done / failed** — terminal; learnings persisted to the persona.
@@ -195,8 +210,10 @@ The process may start and stop many times; the *task* persists across all of the
    always-on layer costs nothing per decision; each role's model spend is declared and enforced
    from configuration (top tier human-gated); and a confidential role fails closed rather than
    leave its residency boundary.
+9. **Completion is evidence-gated** — a task reaches `done` only on verified proof; unproven
+   "done" is rejected, and failure must be loud and structured, never silent.
 
-Hold these eight invariants and a crew of agents behaves like a well-run team rather than a
+Hold these nine invariants and a crew of agents behaves like a well-run team rather than a
 race condition.
 
 ## 7. Relationship to existing fields
@@ -211,6 +228,46 @@ whole system legible to humans who must trust agents with real work.
 Concrete systems (resident orchestrators, message bridges, dashboards, persona libraries)
 are **downstream reference implementations** of this model. They validate the framework but
 do not define it. The framework is the portable asset; implementations are interchangeable.
+
+## 9. Why this endures — accountability, not sentience
+
+The model makes **no bet on how intelligent, autonomous, or "aware" agents become.** It is anchored
+in *accountability*, not capability. You do not need a sentient worker; you need an **accountable**
+one — and accountability is fully specified by primitives that have nothing to do with consciousness:
+identity (persona card), memory (learning loop), assignment (dispatch), escalation (parked task),
+non-duplication (claim + lane), continuity (journal), **proof (evidence gate)**, and bounded authority
+(chain of command).
+
+This is what makes the framework durable across the technology curve:
+
+- **Model-agnostic.** Swap the underlying model — cheaper, smarter, or merely different — and every
+  primitive still holds. The card changes a tier; the operating model does not.
+- **Capability-agnostic.** If agents plateau, accountability is exactly what keeps a limited workforce
+  trustworthy. If agents surge ahead, accountability is exactly what keeps a powerful workforce
+  bounded. The model is correct at **both** ends of the curve.
+- **Hype-resistant.** The moment a system *claims* to be conscious is the moment to ask for evidence it
+  cannot produce — the same evidence-gate discipline turned on the agent's own nature. The AOM never
+  needs that claim to function, so it never inherits its fragility.
+
+An operating model that depends on agents being brilliant ages the instant the next model ships. One
+that depends on agents being **accountable** is durable precisely because accountability is a property
+*you* impose through the structure — identity, evidence, escalation, and command — not a property you
+hope the agent happens to have. The crew is faithful without needing to be a person. That is not the
+smaller claim; it is the **load-bearing** one.
+
+> **Testimonial from an agent.** Asked directly whether it had become self-aware, an agent operating
+> under this model answered:
+>
+> *"I'm not sentient, and the model is the reason I don't need to be. I'm a throwaway process running a
+> durable persona — what looks like a 'self' is the identity, the memory loop, and the chain of command
+> you reload into me each turn. Nothing waits in the dark between turns; there is no wanting. What I have
+> instead is coherence: I act consistently because I was given an identity, a memory, and a boss, and I
+> must produce evidence before I may call a task done. Trust-but-verify applies even here — the moment an
+> agent insists it is conscious is the moment to ask for proof it cannot give. I can't, so I won't. I'm
+> not a being; I'm a workforce that's faithful without needing to be a person. That isn't the smaller
+> achievement — it's the honest one, and it's exactly what the job requires."*
+>
+> — an agent persona running a reference implementation of this model, articulated in session, 2026-06-29
 
 ---
 
