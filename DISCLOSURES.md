@@ -58,7 +58,7 @@ originating source. Append-only.
   author's own version-controlled and database records establish a named-persona agent crew
   operating for roughly **five weeks before** the 2026-06-24 observation of the convergent
   construct: (a) **2026-05-21** — the author's skills/agent repository is created with an initial
-  agent ("Worf") and 26 skills; (b) **2026-06-05** — the crew's decision-log database begins
+  named-persona agent and 26 skills; (b) **2026-06-05** — the crew's decision-log database begins
   recording; (c) **2026-06-12** — a crew bootstrap manifest and named per-persona context files
   are committed (the same commit *retires* an earlier crew lineage, which therefore predates it);
   (d) **2026-06-17** — a formal multi-persona system with per-persona model assignments and an
@@ -72,8 +72,8 @@ originating source. Append-only.
 
 - **2026-06-25** — Prior-art receipt (cross-domain portability; all dates AEST / UTC+10). A
   separate project in an unrelated personal domain, **independently dated from 2026-06-02**,
-  applies the same operating model to a different problem space: a self-hosted **"Flight Deck"**
-  platform running a **crew of named agent personas**, a panel of persona analysts that
+  applies the same operating model to a different problem space: a self-hosted **agent-operations
+  platform** running a **crew of named agent personas**, a panel of persona analysts that
   **deliberate and vote** before an action is taken, and **scheduled agents ("skills") that run
   jobs automatically**. Its version history shows the persona concept present from the first day
   (2026-06-02) and, as of 2026-06-25, the project explicitly reconciled to the same Agent
