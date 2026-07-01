@@ -2,7 +2,7 @@
 
 > A vendor-neutral framework for running AI agents as a managed, accountable workforce.
 >
-> Author: **Eugene Calalang** · First captured: **2026-06-23** · Updated: **2026-06-30** · Status: Draft v0.3
+> Author: **Eugene Calalang** · First captured: **2026-06-23** · Updated: **2026-07-01** · Status: Draft v0.4
 
 ---
 
@@ -170,6 +170,11 @@ says exactly what broke and what it needs — rather than exit silently. Verifia
 failure are the same property seen from two sides: both convert "done" from a claim the worker makes
 into a fact the system can check. *Verifiable actions are what generate trust* — a crew you can trust
 without watching is a crew whose every completion leaves proof behind.
+
+> **In practice.** For a real incident where an existence-only gate accepted a *fabricated*
+> completion — a worker that never did the work, wrote a plausible file, and passed review — and
+> the six-check provenance contract that closed the hole, see
+> [`case-studies/fabricated-completion.md`](case-studies/fabricated-completion.md).
 
 ## 5. Task lifecycle
 

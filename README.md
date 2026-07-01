@@ -64,6 +64,10 @@ agent workforce legible, governable, and trustworthy to the humans who delegate 
 [`docs/agent-operating-model.md`](docs/agent-operating-model.md) for the full model and
 [`docs/diagram.md`](docs/diagram.md) for the one-page visual.
 
+For the discipline seen in practice, [`docs/case-studies/fabricated-completion.md`](docs/case-studies/fabricated-completion.md)
+walks through a real incident where an existence-only completion gate accepted a fabricated result —
+and the six-point provenance contract that now prevents it.
+
 This document is captured here, dated and attributed, as portable personal IP.
 
 ---
