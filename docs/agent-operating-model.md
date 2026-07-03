@@ -229,6 +229,27 @@ Concrete systems (resident orchestrators, message bridges, dashboards, persona l
 are **downstream reference implementations** of this model. They validate the framework but
 do not define it. The framework is the portable asset; implementations are interchangeable.
 
+**Two complementary planes.** In practice a reference implementation separates into two
+composable layers, and neither is the whole model on its own:
+
+- **The runtime plane (engine room)** owns execution: dispatch, atomic claim and lane
+  addressing, durable per-persona memory, the always-on auto-drainer, and cost/residency
+  enforcement. This is where the ten primitives are *enacted*.
+- **The experience-and-governance plane (cockpit)** owns legibility and human judgement: the
+  working journal made observable, the two doors, evidence-gated status carrying explicit
+  confidence (reported directly, inferred from signals, or flagged stale), and the approval
+  surface through which bounded autonomy is exercised. This is where the model is *made
+  accountable to the humans who delegate to it*.
+
+The two planes compose through a **provider seam** — a normalised model of agents, work
+items, events, and approvals — so a cockpit can front any conformant runtime and a runtime
+can be observed by any conformant cockpit. This separability is itself evidence for the
+portability claim (§10): an independently-built cockpit that never saw this model can still
+map cleanly onto its primitives, because the primitives describe the *coordination problem*,
+not a particular codebase. A cockpit that observes without owning work state validates
+invariant 6 (engine generic; identity in the card) from the outside in — the strongest kind
+of confirmation, because it was arrived at without reference to the framework.
+
 ## 9. Why this endures — accountability, not sentience
 
 The model makes **no bet on how intelligent, autonomous, or "aware" agents become.** It is anchored
