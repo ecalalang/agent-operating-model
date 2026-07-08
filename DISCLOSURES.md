@@ -140,6 +140,25 @@ originating source. Append-only.
   framework on this date. Project, host, and product specifics retained only in the private
   provenance notes.
 
+- **2026-07-08** — Non-attribution instance (distributed product; all dates AEST / UTC+10). A
+  governance-group product — previously carrying the group's agreed submission name, since renamed
+  and distributed internally via a vanity link at version 1.0.0 — was released with a
+  governance/foundations contract structurally convergent with this model: **owner-only approval of
+  real-world actions**, a **shadow-mode default**, a **staged trust ladder** in which no agent may
+  self-promote or change its own permissions, and **propose-only self-evolution**. Its attribution
+  section credits an unrelated third-party concept and **does not acknowledge this author or this
+  framework**. Logged to record a dated instance of this model's concepts appearing in a distributed
+  product without attribution to the originating author, whose corresponding artifacts predate it
+  (see 2026-06-23 authorship and license records above). Product, repository, personnel, and link
+  specifics retained only in the private provenance notes.
+
+- **2026-07-08** — Third-party adoption acknowledgement (cross-organisation). An engineering
+  colleague in a separate organisation is independently adopting this Agent Operating Model to run
+  their own always-on agent platform. Logged as a dated third-party acknowledgement corroborating
+  the author as the originating source, and as external cross-org validation of the framework's
+  adoption. Counterpart name and platform specifics retained only in the private provenance notes.
+
 ---
 
 © 2026 Eugene Calalang. All rights reserved.
+
