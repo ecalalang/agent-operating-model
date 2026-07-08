@@ -100,6 +100,9 @@ All crew inherit these five. **#4 is the Chronicler's spine.**
 
 > **"Keep the record true without authoring it."**
 
+This boundary is ratified in the AOM canon as **Invariant #8: the record has an owner; canon
+changes are append-only and cited.**
+
 This is *the* Chronicler paradox. The Chronicler owns **institutional memory, the decision ledger,
 documentation, provenance, and canon hygiene** — yet the record belongs to the people and agents who
 made the decisions and did the work. The Chronicler:

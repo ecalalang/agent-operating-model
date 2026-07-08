@@ -2,7 +2,9 @@
 
 > A vendor-neutral framework for running AI agents as a managed, accountable workforce.
 >
-> Author: **Eugene Calalang** · First captured: **2026-06-23** · Updated: **2026-07-09** · Status: Draft v0.5
+> Author: **Eugene Calalang** · First captured: **2026-06-23** · Updated: **2026-07-09** · Status: Draft v0.6
+>
+> Version note: Invariant #8 (record ownership) ratified 2026-07-09.
 
 ---
 
@@ -231,14 +233,15 @@ The process may start and stop many times; the *task* persists across all of the
 5. **Memory and journals belong to the persona/task, never the process.**
 6. **Engine is generic; identity lives in the card.**
 7. **Autonomy is bounded by an explicit chain of command.**
-8. **Supervision is free; spend is budgeted; confidential roles are residency-pinned.** The
+8. **The record has an owner; canon changes are append-only and cited.**
+9. **Supervision is free; spend is budgeted; confidential roles are residency-pinned.** The
    always-on layer costs nothing per decision; each role's model spend is declared and enforced
    from configuration (top tier human-gated); and a confidential role fails closed rather than
    leave its residency boundary.
-9. **Completion is evidence-gated** — a task reaches `done` only on verified proof; unproven
+10. **Completion is evidence-gated** — a task reaches `done` only on verified proof; unproven
    "done" is rejected, and failure must be loud and structured, never silent.
 
-Hold these nine invariants and a crew of agents behaves like a well-run team rather than a
+Hold these ten invariants and a crew of agents behaves like a well-run team rather than a
 race condition.
 
 ## 7. Relationship to existing fields
