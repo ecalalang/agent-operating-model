@@ -2,7 +2,7 @@
 
 > A vendor-neutral framework for running AI agents as a managed, accountable workforce.
 >
-> Author: **Eugene Calalang** · First captured: **2026-06-23** · Updated: **2026-07-01** · Status: Draft v0.4
+> Author: **Eugene Calalang** · First captured: **2026-06-23** · Updated: **2026-07-09** · Status: Draft v0.5
 
 ---
 
@@ -24,6 +24,7 @@ counterpart in the AOM:
 |---|---|
 | Job description | **Persona card** — role, skills, tools, model/cost budget |
 | Training that sticks | **Learning loop** — durable persona memory loaded at start, written at end |
+| Institutional memory / "where is it written down?" | **Chronicle** — the curated record and canon, owned by a chronicler role |
 | A manager assigns work | **Dispatch** — the orchestrator hands a task to a role |
 | Asking the manager a question | **Parked task** — async escalation without blocking a process |
 | No two people grab the same ticket | **Claim + lane addressing** — exactly one consumer per message |
@@ -32,12 +33,29 @@ counterpart in the AOM:
 | Reports to a boss, who reports up | **Chain of command** — bounded autonomy |
 | "Did you actually finish?" — proof before sign-off | **Evidence gate** — completion is verified, not asserted |
 
-The completeness of this mapping is itself evidence the model is sound: a real worker needs
-all nine, and all nine fall out of asking "but what happens when…?".
+The completeness of this mapping is itself evidence the model is sound: a real workforce needs
+these coordination contracts, and they fall out of asking "but what happens when…?".
 
 ## 3. Roles, triggers, and tiers
 
-### 3.1 One always-on auto-drainer per lane
+### 3.1 The three foundational roles
+
+The AOM's organizational model has **three foundational roles**, not two:
+
+| Foundational role | Organizational analogue | AOM responsibility |
+|---|---|---|
+| **Manager / Architect** | Manager, lead, accountable decider-with-the-human | Directs the work, frames options, triages assignments, and loops product or architecture decisions through the human principal. |
+| **Worker / Employee** | Individual contributor | Executes assigned work within its persona card, tools, budget, autonomy tier, and evidence gate. |
+| **Chronicler** | Librarian, archivist, record custodian | Keeps the record: curates institutional memory, the decision ledger, documentation, provenance, and the framework canon itself. |
+
+The durability-plane primitives already produced a record: the **persona card / canon** (§4.1),
+the **learning loop** (§4.2), and the **working journal** (§4.6) capture what a crew is, what it
+learns, and what happened. The Chronicler is the named owner of that record. It does not decide
+for the manager or execute for the worker; it keeps their outputs true, cited, findable, and
+append-only. Institutional memory was a set of primitives with no explicit custodian. The
+Chronicler is that custodian.
+
+### 3.2 One always-on auto-drainer per lane
 Exactly **one** orchestrator persistently watches each **dispatch lane** and assigns its work.
 Everyone else is **summoned on a trigger** and is otherwise not running. The invariant is one
 auto-drainer **per lane**, not one per system: a simple crew runs a single orchestrator, while a
@@ -46,7 +64,7 @@ polling cadence (e.g. a fast operational loop beneath a slower strategic one). W
 there is still a **single dispatcher, not a swarm of pollers** competing for the same queue. This
 keeps cost bounded and coordination deterministic while letting orchestration scale hierarchically.
 
-### 3.2 Trigger taxonomy
+### 3.3 Trigger taxonomy
 Roles are woken by *event type*, not kept idling:
 
 - **Event-triggered** — e.g. a review role woken by a change/PR event.
@@ -59,7 +77,7 @@ Roles are woken by *event type*, not kept idling:
   autonomously. It exists only inside a human-coupled session, because its job is to loop
   decisions through a human. This is a deliberate constraint, not a limitation.
 
-### 3.3 Tiers
+### 3.4 Tiers
 The model supports two deployment tiers that share the same primitives:
 
 - **Unmanaged tier** — no always-on orchestrator; roles are invoked directly by a human or
@@ -138,10 +156,12 @@ human can attach to an in-flight task; the autonomous worker yields; single-flig
 preserved and context transfers through the journal.
 
 ### 4.8 Chain of command (bounded autonomy)
-Authority is explicit and layered: **Human principal → judgment/architect role →
-orchestrator → worker roles.** Workers execute; the orchestrator coordinates; the judgment
-role designs and decides *with* the human; the human owns intent. No layer exceeds its
-mandate. Autonomy is a dial set per role, not a default.
+Authority is explicit and layered: **Human principal → manager/architect role →
+orchestrator → worker roles.** Workers execute; the orchestrator coordinates; the manager/architect
+role designs and decides *with* the human; the human owns intent. The Chronicler sits beside this
+chain as custodian of the record the chain produces: it preserves decisions, journals, learnings,
+and canon without claiming the authority to ratify or perform them. No layer exceeds its mandate.
+Autonomy is a dial set per role, not a default.
 
 ### 4.9 Cost & residency governance (economic accountability)
 An employed workforce has a budget and a confidentiality boundary; so does an agent crew. Three
