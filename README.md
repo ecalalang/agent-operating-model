@@ -70,6 +70,9 @@ and the six-point provenance contract that now prevents it.
 
 This document is captured here, dated and attributed, as portable personal IP.
 
+**Social preview card:** [`docs/aom-hook-mascot-1200x627.png`](docs/aom-hook-mascot-1200x627.png) — the
+project's Open Graph / share image (1200×627), used as the social preview when this repo is posted.
+
 ---
 
 © 2026 Eugene Calalang. All rights reserved.
