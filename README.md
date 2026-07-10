@@ -68,6 +68,17 @@ For the discipline seen in practice, [`docs/case-studies/fabricated-completion.m
 walks through a real incident where an existence-only completion gate accepted a fabricated result —
 and the six-point provenance contract that now prevents it.
 
+## Protocols
+
+Wire-contract standards that downstream reference implementations conform to:
+
+- [`docs/protocols/daystrom-fleet-protocol-v1.md`](docs/protocols/daystrom-fleet-protocol-v1.md)
+  — **Daystrom Fleet Protocol (DFP) v1**, the vendor-neutral card-comms standard for hub-to-hub
+  and ship-to-hub federation (envelope, transport abstraction, identity/privacy, heartbeat,
+  config-only onboarding). Ratified 2026-07-10.
+
+---
+
 This document is captured here, dated and attributed, as portable personal IP.
 
 **Social preview card:** [`docs/aom-hook-mascot-1200x627.png`](docs/aom-hook-mascot-1200x627.png) — the
