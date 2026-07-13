@@ -77,6 +77,11 @@ Wire-contract standards that downstream reference implementations conform to:
   and ship-to-hub federation (envelope, transport abstraction, identity/privacy, heartbeat,
   config-only onboarding). Ratified 2026-07-10.
 
+## Acknowledgments
+
+AOM is shaped in part by practitioners who build against it and feed findings
+upstream. Community contributors are recognised in [`CONTRIBUTORS.md`](CONTRIBUTORS.md).
+
 ---
 
 This document is captured here, dated and attributed, as portable personal IP.
