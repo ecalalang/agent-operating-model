@@ -90,7 +90,7 @@ The model supports two deployment tiers that share the same primitives:
 A crew can graduate from unmanaged to managed without changing its persona cards or
 learning loops.
 
-## 4. The ten primitives
+## 4. The eleven primitives
 
 ### 4.1 Persona card (job description)
 A declarative definition of a role: its name, the skills/tools it may use, its model and
@@ -198,6 +198,41 @@ without watching is a crew whose every completion leaves proof behind.
 > the six-check provenance contract that closed the hole, see
 > [`case-studies/fabricated-completion.md`](case-studies/fabricated-completion.md).
 
+### 4.11 Liveness & attestation (a heartbeat is a dead-man's switch)
+An accountable crew must **prove it is alive**, and prove **who** is alive — it is never *assumed*
+alive because a door answered or a status field says `LIVE`. Three contracts make liveness a fact
+the system checks rather than a hope it holds:
+
+- **Mandatory check-ins, silence defaults to compromised.** Every live seat emits a check-in on a
+  cadence. A *missed* check-in is not neutral and not "probably fine" — it defaults to
+  **presumed-compromised**, because the failure modes that matter (a hung spawner, a wedged session,
+  a captured seat) are exactly the ones that emit nothing. A passive inbound watcher is blind to a
+  silent non-event; only a positive, expected signal on a clock can bound how long a seat can be
+  dead — or subverted — before anyone notices.
+- **Fence before you kill, then re-attest.** The response to a presumed-compromised seat is not an
+  immediate respawn on top of possibly-hostile state. It is to **fence** the seat's authority first
+  — revoke its ability to move money, merge to canon, hold scarce leases, or speak on the wire — and
+  *then* recover it through **re-attestation**. Isolation precedes replacement; a seat re-enters the
+  chain only after it proves itself again.
+- **Attestation is adversarial: identity is a secret, not an address.** A seat proves it is itself
+  with a **per-seat secret** it alone holds — never with a claimed sender address or a
+  continuity marker drawn from shared, observable state. An address identifies *where*, not *who*;
+  anything another party can read, another party can replay. Authentication and addressing are
+  different problems, and liveness that trusts the address is liveness an adversary can forge.
+
+The mechanism has a failure mode of its own, and it must be designed out: **a dead-man's switch that
+cries wolf is worse than none.** An alarm that fences healthy seats — firing on work that was
+*actioned but not yet acknowledged*, or on a **planned** stand-down read as death — trains the crew
+to disable it. So the trigger must be precise: escalate only on genuinely **un-actioned** obligation
+*and* **unexpected** darkness; a planned stand-down **de-registers** its heartbeat; and a single
+**probe precedes** any counter-measure. Define what counts as a miss, or the switch fences the crew
+it was built to protect.
+
+> **In practice.** For the two incidents that motivate this primitive — a live command post whose
+> mail sat unread until the human principal became its transport layer (liveness that was assumed,
+> never proven), and a presumed-dead alarm that nearly fenced a *healthy* seat during a clean
+> announced rest — see [`case-studies/presumed-alive.md`](case-studies/presumed-alive.md).
+
 ## 5. Task lifecycle
 
 A task is the durable unit of work. Its state machine:
@@ -233,15 +268,33 @@ The process may start and stop many times; the *task* persists across all of the
 5. **Memory and journals belong to the persona/task, never the process.**
 6. **Engine is generic; identity lives in the card.**
 7. **Autonomy is bounded by an explicit chain of command.**
-8. **The record has an owner; canon changes are append-only and cited.**
+8. **The record has an owner; canon changes are append-only, cited, and mechanically enforced.**
+   Append-only is only real if a machine enforces it. Ratified decisions are added and superseded,
+   never rewritten; **automated actors — cloud builds, bots, any non-human writer — are barred from
+   canon writes**; and the barrier is a **fail-closed** guard (a merge/review gate that rejects on
+   timeout or ambiguity, defaulting *closed*), not a convention. A rule the record merely states
+   about itself is one an out-of-band writer can quietly break. (For the incident where an
+   automated worker silently rewrote two ratified ledger entries because append-only was only a
+   convention, see [`case-studies/canon-rewrite.md`](case-studies/canon-rewrite.md).)
 9. **Supervision is free; spend is budgeted; confidential roles are residency-pinned.** The
    always-on layer costs nothing per decision; each role's model spend is declared and enforced
    from configuration (top tier human-gated); and a confidential role fails closed rather than
    leave its residency boundary.
-10. **Completion is evidence-gated** — a task reaches `done` only on verified proof; unproven
-   "done" is rejected, and failure must be loud and structured, never silent.
+10. **Completion is evidence-gated against live reality, across the whole lifecycle** — a task
+   reaches `done` only on verified proof; unproven "done" is rejected, and failure must be loud and
+   structured, never silent. Two refinements make the gate real: the evidence must reflect the
+   **live** system, not a stale artifact or a summary *about* it — verify against what is running,
+   never trust a record over the state it describes; and the gate covers the **full lifecycle,
+   including teardown** — a resource-lifecycle change is proven only when *release* is proven to
+   fire, not merely when acquisition succeeds. A happy-path proof that never exercises the
+   teardown half passes review and unit tests and still leaks in production.
+11. **Liveness is asserted and adversarially attested — silence defaults to compromised.** A seat
+   proves it is alive on a cadence and proves *who* it is with a per-seat secret; a missed check-in
+   is presumed-compromised, not presumed-fine; the response is fence-then-re-attest, not blind
+   respawn; and the alarm itself is precise enough not to fence healthy seats (un-actioned *and*
+   unexpected, planned stand-downs de-register, probe before counter-measure).
 
-Hold these ten invariants and a crew of agents behaves like a well-run team rather than a
+Hold these eleven invariants and a crew of agents behaves like a well-run team rather than a
 race condition.
 
 ## 7. Relationship to existing fields
@@ -262,7 +315,7 @@ composable layers, and neither is the whole model on its own:
 
 - **The runtime plane (engine room)** owns execution: dispatch, atomic claim and lane
   addressing, durable per-persona memory, the always-on auto-drainer, and cost/residency
-  enforcement. This is where the ten primitives are *enacted*.
+  enforcement. This is where the eleven primitives are *enacted*.
 - **The experience-and-governance plane (cockpit)** owns legibility and human judgement: the
   working journal made observable, the two doors, evidence-gated status carrying explicit
   confidence (reported directly, inferred from signals, or flagged stale), and the approval
@@ -284,8 +337,8 @@ The model makes **no bet on how intelligent, autonomous, or "aware" agents becom
 in *accountability*, not capability. You do not need a sentient worker; you need an **accountable**
 one — and accountability is fully specified by primitives that have nothing to do with consciousness:
 identity (persona card), memory (learning loop), assignment (dispatch), escalation (parked task),
-non-duplication (claim + lane), continuity (journal), **proof (evidence gate)**, and bounded authority
-(chain of command).
+non-duplication (claim + lane), continuity (journal), **proof (evidence gate)**, bounded authority
+(chain of command), and **liveness (adversarial attestation)**.
 
 This is what makes the framework durable across the technology curve:
 
