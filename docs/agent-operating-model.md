@@ -233,6 +233,30 @@ it was built to protect.
 > never proven), and a presumed-dead alarm that nearly fenced a *healthy* seat during a clean
 > announced rest — see [`case-studies/presumed-alive.md`](case-studies/presumed-alive.md).
 
+### 4.12 Canon–runtime parity (a ratified decision is not a deployed one)
+A decision recorded as settled and a system that actually behaves that way are **two separate
+claims**, and a governance process that only enforces the first will accumulate silent drift in the
+second. Two disciplines keep canon honest against what is actually running:
+
+- **Ratification is not evidence of deployment.** Citing a ratified decision proves the decision was
+  *made*; it proves nothing about whether the artifact it describes was *changed*. The ledger cannot
+  observe a deployment it does not run, so a decision's status in canon and its status on the live
+  system must be checked as independent facts, never substituted for each other.
+- **Standing canon is re-verified against the live artifact, not against memory of the ruling.** The
+  same evidence gate that closes existence-only completion for a *task* (§4.10) applies to standing
+  decisions over time: query the actual running configuration, process definition, or deployed
+  artifact — not a file that merely claims to implement the decision, and not an agent's confident
+  recollection of having read the ratification.
+
+Left unchecked, this drift is invisible by construction: every account of the system — the ledger,
+and every agent citing it — agrees with itself while disagreeing with reality, because nothing in
+that agreement is a query against the thing being described.
+
+> **In practice.** For an incident where a fleet-wide rename was ratified and cited as settled for
+> two weeks while the live process still ran under the old name and old identity — missed even by
+> the agent who had re-read the ratification minutes earlier — see
+> [`case-studies/canon-runtime-drift.md`](case-studies/canon-runtime-drift.md).
+
 ## 5. Task lifecycle
 
 A task is the durable unit of work. Its state machine:
@@ -293,8 +317,12 @@ The process may start and stop many times; the *task* persists across all of the
    is presumed-compromised, not presumed-fine; the response is fence-then-re-attest, not blind
    respawn; and the alarm itself is precise enough not to fence healthy seats (un-actioned *and*
    unexpected, planned stand-downs de-register, probe before counter-measure).
+12. **A ratified decision and a deployed one are different claims — check the artifact, not the
+   ledger's account of it.** Standing canon is re-verified against the live running system on a
+   cadence, the same way liveness and task completion are; citing that a decision was ratified is
+   never itself evidence that it took effect.
 
-Hold these eleven invariants and a crew of agents behaves like a well-run team rather than a
+Hold these twelve invariants and a crew of agents behaves like a well-run team rather than a
 race condition.
 
 ## 7. Relationship to existing fields
