@@ -214,24 +214,43 @@ the system checks rather than a hope it holds:
   — revoke its ability to move money, merge to canon, hold scarce leases, or speak on the wire — and
   *then* recover it through **re-attestation**. Isolation precedes replacement; a seat re-enters the
   chain only after it proves itself again.
-- **Attestation is adversarial: identity is a secret, not an address.** A seat proves it is itself
-  with a **per-seat secret** it alone holds — never with a claimed sender address or a
-  continuity marker drawn from shared, observable state. An address identifies *where*, not *who*;
-  anything another party can read, another party can replay. Authentication and addressing are
-  different problems, and liveness that trusts the address is liveness an adversary can forge.
+- **Attestation is adversarial *at the boundary where an adversary might be*: identity is a secret,
+  not an address.** Where a message can plausibly originate outside the trusted realm — cross-realm,
+  external, over an untrusted transport — a seat proves it is itself with a **per-seat secret** it
+  alone holds, never with a claimed sender address or a continuity marker drawn from shared,
+  observable state. An address identifies *where*, not *who*; anything another party can read,
+  another party can replay.
 
-The mechanism has a failure mode of its own, and it must be designed out: **a dead-man's switch that
-cries wolf is worse than none.** An alarm that fences healthy seats — firing on work that was
-*actioned but not yet acknowledged*, or on a **planned** stand-down read as death — trains the crew
-to disable it. So the trigger must be precise: escalate only on genuinely **un-actioned** obligation
-*and* **unexpected** darkness; a planned stand-down **de-registers** its heartbeat; and a single
-**probe precedes** any counter-measure. Define what counts as a miss, or the switch fences the crew
-it was built to protect.
+Both halves of this contract have a failure mode of their own, and both must be designed out.
 
-> **In practice.** For the two incidents that motivate this primitive — a live command post whose
-> mail sat unread until the human principal became its transport layer (liveness that was assumed,
-> never proven), and a presumed-dead alarm that nearly fenced a *healthy* seat during a clean
-> announced rest — see [`case-studies/presumed-alive.md`](case-studies/presumed-alive.md).
+**A dead-man's switch that cries wolf is worse than none.** An alarm that fences healthy seats —
+firing on work that was *actioned but not yet acknowledged*, or on a **planned** stand-down read as
+death — trains the crew to disable it. So the trigger must be precise: escalate only on genuinely
+**un-actioned** obligation *and* **unexpected** darkness; a planned stand-down **de-registers** its
+heartbeat; and a single **probe precedes** any counter-measure. Define what counts as a miss, or the
+switch fences the crew it was built to protect.
+
+**An attestation control with no stated boundary will be applied past it, and that is worse than not
+having it.** "Identity is a secret, not an address" is correct where an adversary might genuinely be
+on the wire. Stated without that qualifier, it reads as a mandate to distrust *every* address —
+including inside a closed, single-operator realm where no adversary was ever assumed possible. Applied
+there, it does not add safety; it teaches seats to refuse genuine, expected orders as "unverified,"
+which is the same failure as the alarm that cries wolf, one bullet up. **Inside a trusted realm, the
+correct answer is not the absence of an identity control — it is the one the realm already has.** A
+seat running as a real Unix user, an LDAP-bound account, or an Entra ID/AD principal has identity that
+is anchored, live-checkable, and administered by infrastructure that already exists; that *is* the
+per-seat secret this contract asks for, without inventing a bespoke signing layer on top of it. Reach
+for the realm's own accounts before reaching for new cryptography, and reserve the cryptographic
+version for the boundary where the realm's own trust genuinely ends.
+
+> **In practice.** For the two incidents that motivate the liveness half of this primitive — a live
+> command post whose mail sat unread until the human principal became its transport layer, and a
+> presumed-dead alarm that nearly fenced a *healthy* seat during a clean announced rest — see
+> [`case-studies/presumed-alive.md`](case-studies/presumed-alive.md). For the incident that motivates
+> the attestation-scope half — a cryptographic identity control, correct at a hostile boundary, that
+> was deployed unscoped onto a closed trusted network and caused command seats to refuse genuine
+> orders as unauthenticated — see
+> [`case-studies/attestation-scope.md`](case-studies/attestation-scope.md).
 
 ### 4.12 Canon–runtime parity (a ratified decision is not a deployed one)
 A decision recorded as settled and a system that actually behaves that way are **two separate
@@ -312,11 +331,15 @@ The process may start and stop many times; the *task* persists across all of the
    including teardown** — a resource-lifecycle change is proven only when *release* is proven to
    fire, not merely when acquisition succeeds. A happy-path proof that never exercises the
    teardown half passes review and unit tests and still leaks in production.
-11. **Liveness is asserted and adversarially attested — silence defaults to compromised.** A seat
-   proves it is alive on a cadence and proves *who* it is with a per-seat secret; a missed check-in
-   is presumed-compromised, not presumed-fine; the response is fence-then-re-attest, not blind
-   respawn; and the alarm itself is precise enough not to fence healthy seats (un-actioned *and*
-   unexpected, planned stand-downs de-register, probe before counter-measure).
+11. **Liveness is asserted and attested at the boundary where an adversary might be — silence
+   defaults to compromised.** A seat proves it is alive on a cadence; a missed check-in is
+   presumed-compromised, not presumed-fine; the response is fence-then-re-attest, not blind respawn;
+   and the alarm itself is precise enough not to fence healthy seats (un-actioned *and* unexpected,
+   planned stand-downs de-register, probe before counter-measure). Proving *who* by per-seat secret
+   is scoped to boundaries where an adversary is plausible; inside a trusted realm, identity anchored
+   in the realm's own accounts (Unix, LDAP, Entra/AD) satisfies the same contract without a bespoke
+   signing layer, and an unscoped attestation control that refuses genuine orders is the same failure
+   as an alarm that cries wolf.
 12. **A ratified decision and a deployed one are different claims — check the artifact, not the
    ledger's account of it.** Standing canon is re-verified against the live running system on a
    cadence, the same way liveness and task completion are; citing that a decision was ratified is
