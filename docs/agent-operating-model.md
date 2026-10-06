@@ -2,9 +2,12 @@
 
 > A vendor-neutral framework for running AI agents as a managed, accountable workforce.
 >
-> Author: **Eugene Calalang** · First captured: **2026-06-23** · Updated: **2026-07-09** · Status: Draft v0.6
+> Author: **Eugene Calalang** · First captured: **2026-06-23** · Updated: **2026-10-06** · Status: Draft v0.7
 >
-> Version note: Invariant #8 (record ownership) ratified 2026-07-09.
+> Version note: Invariant #8 (record ownership) ratified 2026-07-09. v0.7 folds in three
+> operating rulings ratified in the reference implementation after v0.6 was published:
+> mandatory dispatch with a cheapest-capable default (§4.3), secrets never entering a hosted
+> repository (§4.9), and the evidence gate being held by a party distinct from the author (§4.10).
 
 ---
 
@@ -111,6 +114,31 @@ selects the right persona, opens a task, and spawns (or attaches to) an instance
 dispatch is centralised, there is exactly one decision-maker for "who does this," which is
 what prevents double-action at the source.
 
+**Dispatch is mandatory, and its default destination is the cheapest capable seat — not the most
+capable one.** Three contracts, and the third is the one that decays:
+
+- **Dispatch is unconditional.** Mechanical work — lookups, searches, inventory, mechanical
+  verification, routine build and review — never stays on the expensive reasoning seat. "It is only
+  one quick lookup" is how the rule dies.
+- **The scarce tier is reserved, by exception and by name.** Expensive reasoning capacity is spent
+  on planning and adversarial judgement, or when the cheap tier is genuinely *exhausted* — which is
+  not the same as momentarily *saturated*. Commodity capacity that queues under load is behaving
+  normally; a queued request is a routine response, not a fallback trigger. Conflating the two
+  silently promotes everything to the top tier under exactly the load that made it expensive.
+- **The lead seat is bound first, and to the letter.** This is where the rule fails, for two
+  structural reasons: the lead's entire product is planning, so inline mechanical work displaces
+  the *most* value; and it is the seat with the standing to skip the rule and **no one below it
+  positioned to catch that it did.** Crews copy what the lead does, not what the lead's rulebook
+  says.
+
+**The framing is load-bearing: this is a division of labour, not a budget.** Stated as
+cost-rationing, the rule loses every argument with "but it's only one quick lookup." Stated as
+division of labour it does not — because the quick lookups *are* the thing that serialises the turn.
+Mechanical steps run inline are **serial**: each blocks the seat until it returns. Dispatched, they
+run **concurrently** while the seat keeps reasoning. The thinking gets deeper *and* the ground gets
+covered faster, in the same wall-clock. *Quality is not traded for efficiency here; both improve,
+because each kind of work lands on the seat built for it.*
+
 ### 4.4 Parked task (async escalation)
 **Rule: never block a live process on a human or asynchronous dependency.** When a worker
 needs an answer it cannot get immediately, it does *not* sit and wait. It:
@@ -181,6 +209,15 @@ contracts make the economics and data-residency of the crew first-class, not inc
   residency boundary** (e.g. on-device / local inference). The dispatcher must **fail closed** —
   refuse, not warn — when routing such a role would cross that boundary. Residency is an invariant
   of the card, enforced at dispatch, not a guideline.
+- **Secrets never enter a hosted repository — encrypted or not, private or not.** No credential,
+  token, or key a secret store would hold is committed to a repository whose remote lives on someone
+  else's infrastructure. Encryption does not change this, and neither does the repository being
+  private. Encryption protects the ciphertext if the *host* is breached; it does not change the fact
+  that the blob now sits on a third party's servers — forkable, permanent in history, and safe only
+  for as long as every trusted private key, on every host, stays uncompromised forever.
+  *"Encrypted, in a private repo" and "never leaves this machine" were never the same guarantee.*
+  The only sanctioned store is host-local and excluded from version control; a value a second host
+  needs travels out of band, never through a push.
 
 ### 4.10 Evidence-gated completion (verifiable trust)
 Trust is granted, but it is **verifiable**. A worker does not close a task by *asserting* it is
@@ -192,6 +229,20 @@ says exactly what broke and what it needs — rather than exit silently. Verifia
 failure are the same property seen from two sides: both convert "done" from a claim the worker makes
 into a fact the system can check. *Verifiable actions are what generate trust* — a crew you can trust
 without watching is a crew whose every completion leaves proof behind.
+
+Two conditions decide whether the gate is real rather than ceremonial. **The gate must be held by a
+party distinct from the author.** A worker that reviews its own output has produced a second
+assertion, not evidence; where a platform refuses self-approval it is enforcing this correctly, and
+routing around the refusal with a comment that merely *looks* like a verdict converts a hard control
+into a soft one. Distinct authorship and distinct review identity are part of the gate, not
+paperwork around it.
+
+**And a control that nothing forces a worker to encounter is not in force, however complete it is.**
+A verification path can be fully built, correct, and documented — and sit entirely unused, because
+the only place it was written down was somewhere a worker is never obliged to look. Adoption is not
+a property of the control; it is a property of the path that leads to it. *If no step in the
+lifecycle makes a worker meet the control, assume it is not running* — and move it somewhere the
+work cannot proceed without it.
 
 > **In practice.** For a real incident where an existence-only gate accepted a *fabricated*
 > completion — a worker that never did the work, wrote a plausible file, and passed review — and
@@ -276,10 +327,17 @@ The process may start and stop many times; the *task* persists across all of the
    about itself is one an out-of-band writer can quietly break. (For the incident where an
    automated worker silently rewrote two ratified ledger entries because append-only was only a
    convention, see [`case-studies/canon-rewrite.md`](case-studies/canon-rewrite.md).)
-9. **Supervision is free; spend is budgeted; confidential roles are residency-pinned.** The
-   always-on layer costs nothing per decision; each role's model spend is declared and enforced
-   from configuration (top tier human-gated); and a confidential role fails closed rather than
-   leave its residency boundary.
+9. **Supervision is free; dispatch is mandatory; spend is budgeted; confidential roles are
+   residency-pinned; secrets never leave the host.** The always-on layer costs nothing per
+   decision; each role's model spend is declared and enforced from configuration (top tier
+   human-gated); and a confidential role fails closed rather than leave its residency boundary.
+   Two additions make the economics hold in practice rather than on paper: **mechanical work is
+   dispatched off the reasoning seat unconditionally** — to the cheapest capable seat by default,
+   with the scarce tier reserved by name, and the *lead* seat bound first because it is the one
+   with standing to skip the rule and no one below positioned to notice; and **no secret is ever
+   committed to a repository hosted by a third party**, encrypted or not, private or not, because
+   ciphertext on someone else's infrastructure and a value that never left the machine are
+   different guarantees.
 10. **Completion is evidence-gated against live reality, across the whole lifecycle** — a task
    reaches `done` only on verified proof; unproven "done" is rejected, and failure must be loud and
    structured, never silent. Two refinements make the gate real: the evidence must reflect the
@@ -287,7 +345,11 @@ The process may start and stop many times; the *task* persists across all of the
    never trust a record over the state it describes; and the gate covers the **full lifecycle,
    including teardown** — a resource-lifecycle change is proven only when *release* is proven to
    fire, not merely when acquisition succeeds. A happy-path proof that never exercises the
-   teardown half passes review and unit tests and still leaks in production.
+   teardown half passes review and unit tests and still leaks in production. Two further
+   conditions decide whether the gate is real: it is **held by a party distinct from the author**
+   — self-review is a second assertion, not evidence — and it is **positioned where the work
+   cannot proceed without meeting it**, because a control a worker is never obliged to encounter
+   is not running, however complete and well-documented it is.
 11. **Liveness is asserted and adversarially attested — silence defaults to compromised.** A seat
    proves it is alive on a cadence and proves *who* it is with a per-seat secret; a missed check-in
    is presumed-compromised, not presumed-fine; the response is fence-then-re-attest, not blind
