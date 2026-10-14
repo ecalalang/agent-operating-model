@@ -90,7 +90,7 @@ The model supports two deployment tiers that share the same primitives:
 A crew can graduate from unmanaged to managed without changing its persona cards or
 learning loops.
 
-## 4. The eleven primitives
+## 4. The twelve primitives
 
 ### 4.1 Persona card (job description)
 A declarative definition of a role: its name, the skills/tools it may use, its model and
@@ -366,7 +366,7 @@ composable layers, and neither is the whole model on its own:
 
 - **The runtime plane (engine room)** owns execution: dispatch, atomic claim and lane
   addressing, durable per-persona memory, the always-on auto-drainer, and cost/residency
-  enforcement. This is where the eleven primitives are *enacted*.
+  enforcement. This is where the twelve primitives are *enacted*.
 - **The experience-and-governance plane (cockpit)** owns legibility and human judgement: the
   working journal made observable, the two doors, evidence-gated status carrying explicit
   confidence (reported directly, inferred from signals, or flagged stale), and the approval
